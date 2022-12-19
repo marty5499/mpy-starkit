@@ -1,9 +1,10 @@
 ---
-weight: 1
-bookFlatSection: true
-title: "Grove dongle"
+weight: 3
+bookFlatSection: false
+title: "3. Grove dongle"
 ---
-Grove dongle
+
+3.Grove dongle
 =====
 
 {{< columns >}}
