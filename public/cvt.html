@@ -1,0 +1,30 @@
+<html>
+  <body style="height: 100%;">
+    <div style="display: flex; height: 100%;">
+      <textarea id="input" style="width: 45%; height: 100%;"></textarea>
+      <button id="convert-button" style="height: 10%;">convert</button>
+      <textarea id="output" style="width: 45%; height: 100%;"></textarea>
+    </div>
+    <script>
+      document.getElementById('convert-button').addEventListener('click', function() {
+        // 取得左邊 textarea 的內容
+        var input = document.getElementById('input').value;
+
+        var output = input.replace(/!\[\]\((\/uploads\/[^\s]+)(?: *= *(\d+%?x))?\)/g, (match, src, width) => {
+          if (width) {
+            width = width.replace(/x$/, '');
+            return `{{< figure src="https://md.webduino.io${src}" width="${width}" >}}`;
+          } else {
+            return `{{< figure src="https://md.webduino.io${src}" >}}`;
+          }
+        });
+        
+        output = output.replace(/```python=/g, '{{< highlight python "linenos=inline,linenostart=1" >}}');
+        output = output.replace(/```\n/g, '{{< /highlight >}}');
+
+        // 將轉換後的結果放到右邊 textarea
+        document.getElementById('output').value = output;
+      });
+    </script>
+  </body>
+</html>
